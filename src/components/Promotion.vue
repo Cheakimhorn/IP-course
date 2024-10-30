@@ -2,7 +2,8 @@
     <div  class="Promo" :style="{backgroundColor: bgColorSecond}">
         <img :src="bgImage" alt="">
         <h2>{{ TittlePromotion }}</h2>
-        <Button :buttonText="'Show Now'"/>
+        <Button @click="shopNow(Promotion)" :buttonText="'Show Now'"/>
+        <!-- <button :buttonText @click="shopNow(Promotion)">Show Now</button> -->
 
     </div>
 </template>
@@ -19,6 +20,11 @@ export default {
         bgColorSecond:String,
         TittlePromotion: String,
 
+    },
+    methods: {
+        shopNow() {
+            alert("Let's Shop: " + this.TittlePromotion);
+        }
     }
 }
 </script>

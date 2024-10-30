@@ -17,6 +17,7 @@
         :TittlePromotion="Promotions.TittlePromotion"
         />
       </div>
+      <div class="">Create local variable</div>
     </div>
   </template>
   <script>
@@ -56,7 +57,7 @@
   .container{
     width: 75rem;
     height: 35rem;
-    background-color: white;
+    background-color: rgb(255, 255, 255);
     padding: 1rem;
   }
   .row1{
