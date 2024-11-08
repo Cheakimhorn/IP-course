@@ -1,7 +1,7 @@
 <template>
-    <div  class="Promo" :style="{backgroundColor: bgColorSecond}">
-        <img :src="bgImage" alt="">
-        <h2>{{ TittlePromotion }}</h2>
+    <div  class="Promo" :style="{backgroundColor: color}">
+        <img :src="image" alt="">
+        <h2>{{ title }}</h2>
         <Button @click="shopNow(Promotion)" :buttonText="'Show Now'"/>
         <!-- <button :buttonText @click="shopNow(Promotion)">Show Now</button> -->
 
@@ -16,14 +16,14 @@ export default {
         Button,
     },
     props:{
-        bgImage:String,
-        bgColorSecond:String,
-        TittlePromotion: String,
+        image:String,
+        color:String,
+        title: String,
 
     },
     methods: {
         shopNow() {
-            alert("Let's Shop: " + this.TittlePromotion);
+            alert("Let's Shop: " + this.title);
         }
     }
 }

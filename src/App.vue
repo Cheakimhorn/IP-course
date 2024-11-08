@@ -3,24 +3,25 @@
       <div class="row1">
         <Category v-for="(products, index) in products"
         :key="index"
-        :imgSrc="products.img"
-        :title="products.title"
-        :items="products.item"
-        :bgColor="products.bgColor"
+        :image="products.image"
+        :name="products.name"
+        :product-count="products.productCount"
+        :color="products.color"
         />
       </div>
       <div class="row2">
-        <Promotion v-for="(Promotions,second) in Promotions"
+        <Promotion v-for="(promotions,second) in promotions"
         :key="second"
-        :bgImage="Promotions.bgImage"
-        :bgColorSecond="Promotions.bgColorSecond"
-        :TittlePromotion="Promotions.TittlePromotion"
+        :image="promotions.image"
+        :color="promotions.color"
+        :title="promotions.title"
         />
       </div>
       <div class="">Create local variable</div>
     </div>
   </template>
   <script>
+  import axis from 'axios';
   import Category from './components/Category.vue';
   import Promotion from './components/Promotion.vue';
   export default{
@@ -31,25 +32,26 @@
     },
     data(){
       return{
-        products:[
-          {img:'../image/buger.png', title:"Cake & Mile",item:14+"items",bgColor:'#F2FCE4'},
-          {img:'../image/alpha.png', title:"Peach",item:17+"items", bgColor:'#FFFCEB'},
-          {img:'../image/kiwi.png', title:"Oganic Kiwi",item:68+"items", bgColor:'#ECFFEC'},
-          {img:'../image/apple.png', title:"Red Apple",item:34+"items", bgColor:'#FEEFEA'},
-          {img:'../image/snac.png', title:"Snack",item:25+"items", bgColor:'#FFF3EB'},
-          {img:'../image/black bluw.png', title:"Black plum",item:10+"items", bgColor:'#FFF3FF'},
-          {img:'../image/vegatable.png', title:"Vegetable",item:65+"items", bgColor:'#F2FCE4'},
-          {img:'../image/headphone.png', title:"Headphone",item:33+"items", bgColor:'#FFFCEB'},
-          {img:'../image/sack.png', title:"Cake & Mile",item:54+"items", bgColor:'#F2FCE4'},
-          {img:'../image/orange.png', title:"Orange",item:63+"items", bgColor:'#FFF3FF'},
-        ],
-        Promotions:[
-          {bgImage:'../image/background1.jpg',bgColorSecond:'#F0E8D5',TittlePromotion:"Everyday Fresh & Clean with Our Products"},
-          {bgImage:'../image/background2.png',bgColorSecond:'#F3E8E8',TittlePromotion:"Make your Breakfast Healthy and Easy"},
-          {bgImage:'../image/background3.jpg',bgColorSecond:'#E7EAF3',TittlePromotion:"The best Organic Products Online"},
-        ]
+        products:[],
+        promotions:[]
       };
     },
+    methods: {
+      async getProduct() {
+        const response = await axis.get('http://localhost:3000/api/categories')
+        const products = response.data;
+        this.products =products;
+      },
+      async getPromotion() {
+        const responsePromotion = await axis.get('http://localhost:3000/api/promotions');
+        const promotions = responsePromotion.data;
+        this.promotions = promotions;
+      }
+    },
+    async mounted() {
+      this.getProduct();
+      this.getPromotion()
+    }
   };
   </script>
 
@@ -70,8 +72,8 @@
   .row2{
     width: 100%;
     height: 69%;
-    /* background-color: rgb(241, 246, 173); */
     display: flex;
     justify-content: space-between;
   }
   </style>
+
