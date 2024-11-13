@@ -1,7 +1,7 @@
 <template>
     <div class="container">
       <div class="row1">
-        <Category v-for="(products, index) in products"
+        <Category v-for="(products, index) in productStore.products"
         :key="index"
         :image="products.image"
         :name="products.name"
@@ -10,48 +10,47 @@
         />
       </div>
       <div class="row2">
-        <Promotion v-for="(promotions,second) in promotions"
+        <Promotion v-for="(promotions,second) in productStore.promotions"
         :key="second"
         :image="promotions.image"
         :color="promotions.color"
         :title="promotions.title"
         />
       </div>
-      <div class="">Create local variable</div>
     </div>
   </template>
   <script>
-  import axis from 'axios';
+  import { onMounted } from 'vue';
   import Category from './components/Category.vue';
   import Promotion from './components/Promotion.vue';
+  import { useProductStore } from './stores/productStore';
   export default{
     name: 'App',
     components: {
       Category,
       Promotion,
+      
     },
-    data(){
+    setup(){
+      const productStore = useProductStore();
+      
+      onMounted(async () => {
+      await productStore.fetchGroups();
+      console.log("Groups:", productStore.groups);
+
+      await productStore.fetchProducts();
+      console.log("Products:", productStore.products);
+
+      await productStore.fetchCategories();
+      console.log("Categories:", productStore.categories);
+
+      await productStore.fetchPromotions();
+      console.log("Promotions:", productStore.promotions);
+      });
       return{
-        products:[],
-        promotions:[]
+        productStore,
       };
     },
-    methods: {
-      async getProduct() {
-        const response = await axis.get('http://localhost:3000/api/categories')
-        const products = response.data;
-        this.products =products;
-      },
-      async getPromotion() {
-        const responsePromotion = await axis.get('http://localhost:3000/api/promotions');
-        const promotions = responsePromotion.data;
-        this.promotions = promotions;
-      }
-    },
-    async mounted() {
-      this.getProduct();
-      this.getPromotion()
-    }
   };
   </script>
 
