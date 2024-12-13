@@ -1,5 +1,5 @@
 <template>
-    <div class="card" :style="{ backgroundColor: color }" @click="navigateToHot">
+    <div class="card" :style="{ backgroundColor: color }"@click="navigateToHot">
         <div class="card-img">
             <img :src="image" :alt="name" />
         </div>
