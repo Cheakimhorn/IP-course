@@ -1,11 +1,11 @@
 <template>
-    <div class="card" :style="{backgroundColor:color}">
+    <div class="card" :style="{ backgroundColor: color }" @click="navigateToHot">
         <div class="card-img">
-            <img :src="image" :alt="name">
+            <img :src="image" :alt="name" />
         </div>
         <div class="card-text">
             <h4>{{ name }}</h4>
-            <p>{{ productCount }}</p>
+            <p>{{ productCount }} items</p>
         </div>
     </div>
 </template>
@@ -14,14 +14,22 @@
 export default {
     name: "Category",
     props: {
-        id: Number,
-        image:String,
+        image: String,
         name: String,
-        productCount: String,
-        color: String
+        productCount: Number,
+        color: String,
     },
-}
+    methods: {
+        navigateToHot() {
+            this.$router.push({
+                path: '/Hot',
+                query: { image: this.image, name: this.name, productCount:this.productCount } 
+            });
+        },
+    },
+};
 </script>
+
 
 <style  scoped>
     .card{
@@ -30,6 +38,8 @@ export default {
         border: 1px solid green;
         width: 6.5rem;
         height: 8.5rem;
+        text-decoration: none;
+        cursor: pointer;
     }
     .card-img{
         width: 100%;
@@ -54,6 +64,6 @@ export default {
         display: flex;
         justify-content: center;
         opacity: 0.8;
-        font-size: 13px;
+        /* font-size: 13px; */
     }
 </style>

@@ -3,7 +3,6 @@
         <img :src="image" alt="">
         <h2>{{ title }}</h2>
         <Button @click="shopNow(Promotion)" :buttonText="'Show Now'"/>
-        <!-- <button :buttonText @click="shopNow(Promotion)">Show Now</button> -->
 
     </div>
 </template>
