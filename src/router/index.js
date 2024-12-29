@@ -1,8 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-
-import Page1 from '@/view/Page1.vue'
-import Page2 from '@/view/Page2.vue'
-import Page3 from '@/view/Page3.vue'
+import Home from '@/view/Home.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -10,18 +7,27 @@ const router = createRouter({
     {
       path: '/page1',
       name: 'page1',
-      component: Page1,
+      component: Home,
     },
     {
         path: '/page2',
         name: 'page2',
-        component: Page2,
+        component: Home,
       },
       {
         path: '/page3',
         name: 'page3',
-        component: Page3,
-      }
+        component: Home,
+      },
+      {
+        path: '/Home',
+        name: 'Home',
+        component: Home,
+      },
+      {
+        path: '/',
+        redirect: '/Home',
+      },
 
   ],
 })

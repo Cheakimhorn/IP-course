@@ -1,24 +1,33 @@
 <template>
     <div class="header">
-      <div class="logo"><h3>Header</h3></div>
+      <div class="logo"><router-link to="/Home" class="nav-button p-3" :class="{active: isActive('Home')}"><h3>Header</h3></router-link></div>
       <div class="allPage">
         <ul>
-          <li><router-link to="/page1" class="nav-button p-3">Page1</router-link></li>
-          <li><router-link to="/page2" class="nav-button p-3">Page2</router-link></li>
-          <li><router-link to="/page3" class="nav-button p-3">Page3</router-link></li>
+          <li><router-link to="/page1" class="nav-button p-3" :class="{active: isActive('page1')}">Page1</router-link></li>
+          <li><router-link to="/page2" class="nav-button p-3" :class="{active: isActive('page2')}">Page2</router-link></li>
+          <li><router-link to="/page3" class="nav-button p-3" :class="{active: isActive('page3')}">Page3</router-link></li>
         </ul>
       </div>
     </div>
   </template>
   
-  <script setup>
+  <script>
+  export default{
+    name:"HeaderPage",
+    props: ['currentPage'],
+
+    methods:{
+      isActive(page){
+        return this.currentPage ===page;
+      }
+    }
+  }
   </script>
   
   <style scoped>
   .header {
     width: 100%;
     height: 5rem;
-    background-color: aqua;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -28,19 +37,17 @@
   .logo {
     width: 70%;
     height: 100%;
-    background-color: burlywood;
     border: 1px solid black;
     display: flex;
     align-items: center;
-    /* justify-content: center; */
     font-weight: bold;
     font-size: 1.5rem;
+    cursor: pointer;
   }
   
   .allPage {
     width: 30%;
     height: 100%;
-    background-color: rgb(144, 222, 135);
     border: 1px solid black;
     border-left: none;
   }
